@@ -1,6 +1,9 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+const cv = require('opencv');
+
+var wCap = new cv.VideoCapture(0);
 
 var curr_direction = {
   "w": false,
@@ -22,9 +25,15 @@ io.on('connection', function(socket){
 
   socket.on("direction_change", function(msg) {
     curr_direction = msg;
-    console.log(curr_direction);
   })
 });
+
+setInterval(() => {
+  const frame = wCap.read();
+  const image = cv.imencode('.jpg', frame).toString('base64');
+
+  io.emit('frame', image);
+}, 1000)
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
