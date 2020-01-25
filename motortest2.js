@@ -23,7 +23,7 @@ var i = 0;
 enable_r.digitalWrite(1);
 enable_r.digitalWrite(1);
 
-while (i < 2){
+while (i < 4){
 motor_r1.digitalWrite(1);
 motor_r2.digitalWrite(0);
 sleep(2000);

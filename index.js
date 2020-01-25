@@ -4,12 +4,17 @@ const io = require('socket.io')(http);
 //const cv = require('opencv');
 const Gpio = require('pigpio').Gpio;
 
-const motor_r = new Gpio(03, {mode: Gpio.OUTPUT});
-const motor_l = new Gpio(03, {mode: Gpio.OUTPUT});
+const motor_rf = new Gpio(03, {mode: Gpio.OUTPUT});
+const motor_rb = new Gpio(05, {mode: Gpio.OUTPUT});
+const motor_lf = new Gpio(08, {mode: Gpio.OUTPUT});
+const motor_lb = new Gpio(10, {mode: Gpio.OUTPUT});
+const enable_r = new Gpio(07, {mode: Gpio.OUTPUT});
+const enable_l = new Gpio(12, {mode: Gpio.OUTPUT});
 
 const speed = 1;
 
-var wCap = new cv.VideoCapture(0);
+//var wCap = new cv.VideoCapture(0);
+//enable code
 
 var curr_direction = {
   "w": false,
@@ -19,8 +24,28 @@ var curr_direction = {
 }
 
 function setSpeed(motor, lSpeed) {
-  let lSpeed = lSpeed * speed;
-  motor.pwmWrite(lSpeed);
+  let enableVal = Math.abs(lSpeed * speed);
+  let pVal = 0;
+  let nVal = 0;
+  if (lSpeed > 0) {
+    pVal = 1;
+  }else if(lSpeed < 0) {
+    nVal = 1;
+  }
+  if (motor){
+    enable_l.pwmWrite(enableVal);
+    motor_lf.digitalWrite(pVal);
+    motor_lb.digitalWrite(nVal);
+  } else {
+    enable_r.pwmWrite(enableVal);
+    motor_rf.digitalWrite(pVal);
+    motor_rb.digitalWrite(nVal);
+  }
+
+  //Den Code um den richtigen Motor mit, enableVal, pVal und nVal anzusteuern
+  //als "motor" gibt es "r" und "l"
+
+
   console.log("Speed set");
 }
 
@@ -29,23 +54,25 @@ function updateMotors() {
   let x = 0 + (curr_direction.a ? -1 : 0) + (curr_direction.d ? 1 : 0);
 
   if (x == 0 && y == 0) {
+    setSpeed(true, 0);
+    setSpeed(false, 0);
     return;
   }
 
   if (x == 0) {
-    setSpeed(motor_r, y * 255);
-    setSpeed(motor_l, y * 255);
+    setSpeed(true, y * 255);
+    setSpeed(false, y * 255);
     return;
   }
 
   if (y == 0) {
-    setSpeed(motor_r, x * 255);
-    setSpeed(motor_l, x * -255);
+    setSpeed(true, x * 255);
+    setSpeed(false, x * -255);
     return;
   }
 
-  setSpeed(motor_r, (255 / 4 * 3 + 255 / 4 * x) * y);
-  setSpeed(motor_r, (255 / 4 * 3 + 255 / 4 * -x) * y);
+  setSpeed(true, (255 / 4 * 3 + 255 / 4 * x) * y);
+  setSpeed(false, (255 / 4 * 3 + 255 / 4 * -x) * y);
 
 }
 
@@ -62,6 +89,7 @@ io.on('connection', function(socket){
 
   socket.on("direction_change", function(msg) {
     curr_direction = msg;
+    console.log(msg);
     updateMotors();
   });
 });
