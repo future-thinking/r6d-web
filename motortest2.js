@@ -5,7 +5,7 @@ const motor_r2 = new Gpio(03, {mode: Gpio.OUTPUT});
 
 let dutyCycle = 255;
 
-while(True){
+while(true){
   motor_r1.pwmWrite(dutyCycle);
   motor_r2.pwmWrite(dutyCycle);
 }
