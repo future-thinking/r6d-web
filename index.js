@@ -9,7 +9,7 @@ const motor_l = new Gpio(03, {mode: Gpio.OUTPUT});
 
 const speed = 1;
 
-var wCap = new cv.VideoCapture(0);
+//var wCap = new cv.VideoCapture(0);
 
 var curr_direction = {
   "w": false,
