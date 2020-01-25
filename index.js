@@ -2,7 +2,7 @@ const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
-/*const Gpio = require('pigpio').Gpio;
+const Gpio = require('pigpio').Gpio;
 
 const motor_rf = new Gpio(03, {mode: Gpio.OUTPUT});
 const motor_rb = new Gpio(05, {mode: Gpio.OUTPUT});
@@ -69,7 +69,6 @@ function updateMotors() {
 
 }
 
-*/
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/drone.html');
 });
