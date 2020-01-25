@@ -14,23 +14,22 @@
       "a":a_press,
       "d":d_press
     }
-    console.log(dirobj);
+    //console.log(dirobj);
     socket.emit('direction_change', dirobj);
   }
 
-  socket.on('frame', (data) => {
-    alert("data");
-  });  let x = 0 + (curr_direction.a ? -1 : 0) + (curr_direction.d ? 1 : 0);
+
+  let x = 0 + (curr_direction.a ? -1 : 0) + (curr_direction.d ? 1 : 0);
 
   if (x == 0 && y == 0) {
     setSpeed(true, 0);
     setSpeed(false, 0);
-    return;
+    return null;
   }
 
 
   document.onkeydown = function (e) {
-    console.log(e);
+    //console.log(e);
     if (e.keyCode == 87) {
       if (!w_press) {
         w_press = true;

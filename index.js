@@ -89,7 +89,7 @@ io.on('connection', function(socket){
 
   socket.on("direction_change", function(msg) {
     curr_direction = msg;
-    console.log(msg);
+    //console.log(msg);
     updateMotors();
   });
 });
