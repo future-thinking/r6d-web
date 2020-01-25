@@ -1,11 +1,11 @@
 const Gpio = require('pigpio').Gpio;
 
-const motor_r1 = new Gpio(08, {mode: Gpio.OUTPUT});
-const motor_r2 = new Gpio(10, {mode: Gpio.OUTPUT});
-const enable_r = new Gpio(12, {mode: Gpio.OUTPUT});
-const motor_l1 = new Gpio(03, {mode: Gpio.OUTPUT});
-const motor_l2 = new Gpio(05, {mode: Gpio.OUTPUT});
-const enable_l = new Gpio(07, {mode: Gpio.OUTPUT});
+const motor_r1 = new Gpio(14, {mode: Gpio.OUTPUT});
+const motor_r2 = new Gpio(15, {mode: Gpio.OUTPUT});
+const enable_r = new Gpio(18, {mode: Gpio.OUTPUT});
+const motor_l1 = new Gpio(02, {mode: Gpio.OUTPUT});
+const motor_l2 = new Gpio(03, {mode: Gpio.OUTPUT});
+const enable_l = new Gpio(04, {mode: Gpio.OUTPUT});
 
 
 while(true){
