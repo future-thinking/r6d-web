@@ -1,7 +1,7 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-const cv = require('opencv');
+//const cv = require('opencv');
 const Gpio = require('pigpio').Gpio;
 
 const motor_r = new Gpio(03, {mode: Gpio.OUTPUT});
@@ -20,11 +20,17 @@ var curr_direction = {
 
 function setSpeed(motor, lSpeed) {
   let lSpeed = lSpeed * speed;
+  motor.pwmWrite(lSpeed);
+  console.log("Speed set");
 }
 
 function updateMotors() {
   let y = 0 + (curr_direction.w ? 1 : 0) + (curr_direction.s ? -1 : 0);
   let x = 0 + (curr_direction.a ? -1 : 0) + (curr_direction.d ? 1 : 0);
+
+  if (x == 0 && y == 0) {
+    return;
+  }
 
   if (x == 0) {
     setSpeed(motor_r, y * 255);
