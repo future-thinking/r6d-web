@@ -1,7 +1,7 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-const cv = require('opencv');
+//const cv = require('opencv');
 const Gpio = require('pigpio').Gpio;
 
 const motor_r = new Gpio(03, {mode: Gpio.OUTPUT});
