@@ -29,7 +29,7 @@ function setSpeed(motor, lSpeed) {
   }else if(lSpeed < 0) {
     nVal = 1;
   }
-  if (motor){
+  if (motor) {
     enable_l.pwmWrite(enableVal);
     motor_lf.digitalWrite(pVal);
     motor_lb.digitalWrite(nVal);
