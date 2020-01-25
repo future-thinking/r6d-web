@@ -46,7 +46,9 @@ function updateMotors() {
   let y = 0 + (curr_direction.w ? 1 : 0) + (curr_direction.s ? -1 : 0);
   let x = 0 + (curr_direction.a ? -1 : 0) + (curr_direction.d ? 1 : 0);
 
-  if (x == 0 && y == 0) {
+  console.log("x: " + x + " y: " + y);
+
+  /*if (x == 0 && y == 0) {
     setSpeed(true, 0);
     setSpeed(false, 0);
     return null;
@@ -65,7 +67,7 @@ function updateMotors() {
   }
 
   setSpeed(true, (255 / 4 * 3 + 255 / 4 * x) * y);
-  setSpeed(false, (255 / 4 * 3 + 255 / 4 * -x) * y);
+  setSpeed(false, (255 / 4 * 3 + 255 / 4 * -x) * y);*/
 
 }
 
@@ -82,7 +84,6 @@ io.on('connection', function(socket){
 
   socket.on("direction_change", function(msg) {
     curr_direction = msg;
-    //console.log(msg);
     updateMotors();
   });
 });
