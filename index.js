@@ -20,11 +20,16 @@ var curr_direction = {
 
 function setSpeed(motor, lSpeed) {
   let lSpeed = lSpeed * speed;
+  //hier
 }
 
 function updateMotors() {
   let y = 0 + (curr_direction.w ? 1 : 0) + (curr_direction.s ? -1 : 0);
   let x = 0 + (curr_direction.a ? -1 : 0) + (curr_direction.d ? 1 : 0);
+
+  if (x == 0 && y == 0) {
+    return;
+  }
 
   if (x == 0) {
     setSpeed(motor_r, y * 255);
