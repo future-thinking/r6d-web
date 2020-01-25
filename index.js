@@ -56,19 +56,19 @@ function updateMotors() {
   if (x == 0 && y == 0) {
     setSpeed(true, 0);
     setSpeed(false, 0);
-    return;
+    return null;
   }
 
   if (x == 0) {
     setSpeed(true, y * 255);
     setSpeed(false, y * 255);
-    return;
+    return null;
   }
 
   if (y == 0) {
     setSpeed(true, x * 255);
     setSpeed(false, x * -255);
-    return;
+    return null;
   }
 
   setSpeed(true, (255 / 4 * 3 + 255 / 4 * x) * y);
