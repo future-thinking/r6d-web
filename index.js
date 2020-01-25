@@ -11,6 +11,8 @@ const speed = 1;
 
 //var wCap = new cv.VideoCapture(0);
 
+
+
 var curr_direction = {
   "w": false,
   "s": false,
@@ -19,8 +21,18 @@ var curr_direction = {
 }
 
 function setSpeed(motor, lSpeed) {
-  let lSpeed = lSpeed * speed;
-  motor.pwmWrite(lSpeed);
+  let enableVal = Math.abs(lSpeed * speed);
+  let pVal = 0;
+  let nVal = 0;
+  if (lSpeed > 0) {
+    pVal = 1;
+  }else if(lSpeed < 0) {
+    nVal = 1;
+  }
+
+  //Den Code um den richtigen Motor mit, enableVal, pVal und nVal anzusteuern
+  //als "motor" gibt es "r" und "l"
+
   console.log("Speed set");
 }
 
@@ -33,19 +45,19 @@ function updateMotors() {
   }
 
   if (x == 0) {
-    setSpeed(motor_r, y * 255);
-    setSpeed(motor_l, y * 255);
+    setSpeed("r", y * 255);
+    setSpeed("l", y * 255);
     return;
   }
 
   if (y == 0) {
-    setSpeed(motor_r, x * 255);
-    setSpeed(motor_l, x * -255);
+    setSpeed("r", x * 255);
+    setSpeed("l", x * -255);
     return;
   }
 
-  setSpeed(motor_r, (255 / 4 * 3 + 255 / 4 * x) * y);
-  setSpeed(motor_r, (255 / 4 * 3 + 255 / 4 * -x) * y);
+  setSpeed("r", (255 / 4 * 3 + 255 / 4 * x) * y);
+  setSpeed("l", (255 / 4 * 3 + 255 / 4 * -x) * y);
 
 }
 
