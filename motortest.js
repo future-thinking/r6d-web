@@ -1,6 +1,4 @@
-'use strict';
-
-const Gpio = require('../').Gpio;
+const Gpio = require('pigpio').Gpio;
 
 const motor_r = new Gpio(03, {mode: Gpio.OUTPUT});
 
