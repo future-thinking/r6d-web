@@ -3,6 +3,6 @@ const led = new Gpio(17, {mode: Gpio.OUTPUT});
 const forward = new Gpio(27, {mode: Gpio.OUTPUT});
 
 while (true) {
-  led.pwmWrite(50);
+  led.pwmWrite(170);
   forward.digitalWrite(1);
 }
