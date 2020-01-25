@@ -14,6 +14,5 @@ while x<2 :
     GPIO.output(05, True)
     sleep(2)
     x += 1
-
-
+    
 GPIO.cleanup()
