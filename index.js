@@ -20,7 +20,7 @@ var curr_direction = {
 
 function setSpeed(motor, lSpeed) {
   let lSpeed = lSpeed * speed;
-  //hier
+  motor.pwmWrite(lSpeed);
 }
 
 function updateMotors() {
