@@ -5,5 +5,5 @@ const motor_r2 = new Gpio(03, {mode: Gpio.OUTPUT});
 
 let dutyCycle = 255;
 
-motor_r1.digitalWrite(led.digitalRead() ^ 1);
-motor_r2.digitalWrite(led.digitalRead() ^ 1);
+motor_r1.digitalWrite(1);
+motor_r2.digitalWrite(1);
