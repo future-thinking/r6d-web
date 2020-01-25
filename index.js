@@ -54,6 +54,8 @@ function updateMotors() {
   let x = 0 + (curr_direction.a ? -1 : 0) + (curr_direction.d ? 1 : 0);
 
   if (x == 0 && y == 0) {
+    setSpeed(true, 0);
+    setSpeed(false, 0);
     return;
   }
 
