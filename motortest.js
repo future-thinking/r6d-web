@@ -1,14 +1,12 @@
 const Gpio = require('pigpio').Gpio;
 
-const motor_r = new Gpio(03, {mode: Gpio.OUTPUT});
+const motor_r1 = new Gpio(03, {mode: Gpio.OUTPUT});
+const motor_r2 = new Gpio(05, {mode: Gpio.OUTPUT});
+const enable_1 = new Gpio(07, {mode: Gpio.OUTPUT});
+var i = 0;
 
-let dutyCycle = 0;
+enable_1.digitalWrite(1);
 
-setInterval(() => {
-  motor_r.pwmWrite(dutyCycle);
+let dutyCycle = 127,5;
 
-  dutyCycle += 5;
-  if (dutyCycle > 255) {
-    dutyCycle = 0;
-  }
-}, 20);
+motor_r1.pwmWrite(dutyCycle);
