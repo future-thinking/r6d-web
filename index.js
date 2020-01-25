@@ -21,7 +21,7 @@ var curr_direction = {
 }
 
 function setSpeed(motor, lSpeed) {
-  let enableVal = Math.abs(lSpeed * speed);
+  let enableVal = Math.floor(Math.abs(lSpeed * speed));
   let pVal = 0;
   let nVal = 0;
   if (lSpeed > 0) {
@@ -48,7 +48,7 @@ function updateMotors() {
 
   console.log("x: " + x + " y: " + y);
 
-  /*if (x == 0 && y == 0) {
+  if (x == 0 && y == 0) {
     setSpeed(true, 0);
     setSpeed(false, 0);
     return null;
@@ -67,7 +67,7 @@ function updateMotors() {
   }
 
   setSpeed(true, (255 / 4 * 3 + 255 / 4 * x) * y);
-  setSpeed(false, (255 / 4 * 3 + 255 / 4 * -x) * y);*/
+  setSpeed(false, (255 / 4 * 3 + 255 / 4 * -x) * y);
 
 }
 
