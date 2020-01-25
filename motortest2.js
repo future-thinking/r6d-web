@@ -25,5 +25,6 @@ motor_r2.digitalWrite(0);
 sleep(2000);
 motor_r1.digitalWrite(0);
 motor_r2.digitalWrite(1);
+sleep(2000);
 i++;
 }
