@@ -1,8 +1,8 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-//const cv = require('opencv');
-const Gpio = require('pigpio').Gpio;
+
+/*const Gpio = require('pigpio').Gpio;
 
 const motor_rf = new Gpio(03, {mode: Gpio.OUTPUT});
 const motor_rb = new Gpio(05, {mode: Gpio.OUTPUT});
@@ -12,9 +12,6 @@ const enable_r = new Gpio(07, {mode: Gpio.OUTPUT});
 const enable_l = new Gpio(12, {mode: Gpio.OUTPUT});
 
 const speed = 1;
-
-//var wCap = new cv.VideoCapture(0);
-//enable code
 
 var curr_direction = {
   "w": false,
@@ -41,10 +38,6 @@ function setSpeed(motor, lSpeed) {
     motor_rf.digitalWrite(pVal);
     motor_rb.digitalWrite(nVal);
   }
-
-  //Den Code um den richtigen Motor mit, enableVal, pVal und nVal anzusteuern
-  //als "motor" gibt es "r" und "l"
-
 
   console.log("Speed set");
 }
@@ -76,7 +69,8 @@ function updateMotors() {
 
 }
 
-app.get('*', function(req, res){
+*/
+app.get('/', function(req, res){
   res.sendFile(__dirname + '/drone.html');
 });
 
@@ -85,7 +79,7 @@ io.on('connection', function(socket){
 
   socket.on("disconnect", function() {
     console.log("User disconnected");
-  })
+  });
 
   socket.on("direction_change", function(msg) {
     curr_direction = msg;
@@ -93,13 +87,6 @@ io.on('connection', function(socket){
     updateMotors();
   });
 });
-
-/*setInterval(() => {
-  const frame = wCap.read();
-  const image = cv.imencode('.jpg', frame).toString('base64');
-
-  io.emit('frame', image);
-}, 1000)*/
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
