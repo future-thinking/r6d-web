@@ -1,5 +1,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
+  console.log("hi");
   var socket = io();
 
   var w_press = false; //87
@@ -14,14 +15,13 @@
       "a":a_press,
       "d":d_press
     }
+    //console.log(dirobj);
     socket.emit('direction_change', dirobj);
   }
 
-  socket.on('frame', (data) => {
-    alert("data");
-  });
 
   document.onkeydown = function (e) {
+    //console.log(e);
     if (e.keyCode == 87) {
       if (!w_press) {
         w_press = true;
