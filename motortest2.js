@@ -8,4 +8,5 @@ let dutyCycle = 255;
 while(true){
   motor_r1.pwmWrite(dutyCycle);
   motor_r2.pwmWrite(dutyCycle);
+  console.log("Hi")
 }
