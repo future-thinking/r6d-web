@@ -30,6 +30,7 @@ function setSpeed(motor, lSpeed) {
   }else if(lSpeed < 0) {
     nVal = 1;
   }
+  console.log("enable val: " + enableVal + " pVal: " + pVal + " nVal: " + nVal);
   if (motor) {
     enable_l.pwmWrite(enableVal);
     motor_lf.digitalWrite(pVal);
