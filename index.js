@@ -9,7 +9,7 @@ const motor_rf = new Gpio(14, {mode: Gpio.OUTPUT});
 const motor_rb = new Gpio(15, {mode: Gpio.OUTPUT});
 
 const enable_l = new Gpio(02, {mode: Gpio.OUTPUT});
-const motor_lf = new Gpio(08, {mode: Gpio.OUTPUT});
+const motor_lf = new Gpio(03, {mode: Gpio.OUTPUT});
 const motor_lb = new Gpio(04, {mode: Gpio.OUTPUT});
 
 const speed = 1;
