@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      io.on('image', (data) => {
+        console.log("image");
+      });
+    </script>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <img id="img">
+  </body>
+</html>
