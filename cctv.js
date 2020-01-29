@@ -1,6 +1,9 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+const cv = require('opencv4nodejs');
+
+const wCap = new cv.VideoCapture(0);
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/cctv.html');
@@ -25,5 +28,7 @@ http.listen(3000, function(){
 
 
 setInterval(() => {
-  io.emit('image', 'some data');
+  const frame = wCap.read();
+  const image = cv.imencode('.jpg', frame).toStript('base64');
+  io.emit('image', image);
 }, 1000)
