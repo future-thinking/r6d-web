@@ -2,7 +2,7 @@
   "name": "r6d-web",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "cctv.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +18,8 @@
   "homepage": "https://github.com/P3ntest/r6d-web#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "opencv4nodejs": "^5.5.0",
     "pigpio": "^3.0.0",
+    "python-bridge": "^1.1.0",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {

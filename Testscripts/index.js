@@ -45,24 +45,24 @@ function setSpeed(motor, lSpeed) {
 }
 
 function updateMotors() {
-  let y = 0 + (curr_direction.w ? 1 : 0) + (curr_direction.s ? -1 : 0);
-  let x = 0 + (curr_direction.a ? -1 : 0) + (curr_direction.d ? 1 : 0);
+  let y = (curr_direction.w ? 1 : 0) + (curr_direction.s ? -1 : 0);
+  let x = (curr_direction.a ? -1 : 0) + (curr_direction.d ? 1 : 0);
 
   console.log("x: " + x + " y: " + y);
 
-  if (x == 0 && y == 0) {
+  if (x === 0 && y === 0) {
     setSpeed(true, 0);
     setSpeed(false, 0);
     return null;
   }
 
-  if (x == 0) {
+  if (x === 0) {
     setSpeed(true, y * 255);
     setSpeed(false, y * 255);
     return null;
   }
 
-  if (y == 0) {
+  if (y === 0) {
     setSpeed(true, x * 255);
     setSpeed(false, x * -255);
     return null;

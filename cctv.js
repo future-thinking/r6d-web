@@ -1,12 +1,14 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-const cv = require('opencv4nodejs');
+const pythonBridge = require('python-bridge');
 
-const wCap = new cv.VideoCapture(0);
+const python = pythonBridge();
+
+python.ex`import io; import time; import picamera`;
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/cctv.html');
+  res.sendFile(__dirname + '/client/cctv.html');
 });
 
 io.on('connection', function(socket){
@@ -28,7 +30,17 @@ http.listen(3000, function(){
 
 
 setInterval(() => {
-  const frame = wCap.read();
-  const image = cv.imencode('.jpg', frame).toStript('base64');
-  io.emit('image', image);
-}, 1000)
+  python`
+  my_stream = io.BytesIO()
+  with picamera.PiCamera() as camera:
+    camera.start_preview()
+    # Camera warm-up time
+    time.sleep(2)
+    camera.capture(my_stream, 'jpeg')
+    print("hi")`.then(x => {
+     console.log(x);
+  });
+  //io.emit('image', image);
+}, 10);
+
+python.end();
