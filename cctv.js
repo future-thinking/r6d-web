@@ -27,7 +27,7 @@ var curr_direction = {
 python.ex`import io; import time; import picamera; import base64; from PIL import Image;`;
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/client/cctv.html');
+  res.sendFile(__dirname + '/client/index.html');
 });
 
 function updateMotors() {
