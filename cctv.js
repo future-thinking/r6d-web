@@ -37,7 +37,7 @@ setInterval(() => {
   python.ex`
   my_stream = io.BytesIO()
   with picamera.PiCamera() as camera:
-    camera.resolution = (200, 300)
+    camera.resolution = (1280, 720)
     # Camera warm-up time
     camera.capture(my_stream, format='jpeg')
 
@@ -55,6 +55,6 @@ setInterval(() => {
     io.emit('image', x);
   });
 
-}, 1000);
+}, 200);
 
 //python.end();
