@@ -47,7 +47,7 @@ setInterval(() => {
   print (aIm)
   
     `.then(x => {
-     console.log(x);
+     console.log(x.substring(0, 20));
   });
   //io.emit('image', image);
 }, 1000);
