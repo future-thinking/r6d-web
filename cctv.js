@@ -5,7 +5,7 @@ const pythonBridge = require('python-bridge');
 
 const python = pythonBridge();
 
-python.ex`import io; import time; import picamera`;
+python.ex`import io; import time; import picamera; import base64`;
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/client/cctv.html');
@@ -33,14 +33,23 @@ setInterval(() => {
   python`
   my_stream = io.BytesIO()
   with picamera.PiCamera() as camera:
-    camera.start_preview()
-    # Camera warm-up time
-    time.sleep(2)
-    camera.capture(my_stream, 'jpeg')
-    print("hi")`.then(x => {
+    camera.resolution = (500, 500)
+    camera.capture(my_stream, format='jpeg')
+    
+  my_stream.seek(0)
+  image = Image.open(my_stream)
+  buffer = io.BytesIO()
+  image.save(buffer, format="PNG")
+  data_uri = base64.b64encode(buffer.read()).decode('ascii')
+  
+  aIm = "data:image/png;base64," + data_uri
+  
+  print (aIm)
+  
+    `.then(x => {
      console.log(x);
   });
   //io.emit('image', image);
-}, 10);
+}, 1000);
 
 python.end();
