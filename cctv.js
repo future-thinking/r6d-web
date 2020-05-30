@@ -37,8 +37,7 @@ setInterval(() => {
   python.ex`
   my_stream = io.BytesIO()
   with picamera.PiCamera() as camera:
-    camera.resolution = (1280, 720)
-    # Camera warm-up time
+    camera.resolution = (640, 360)
     camera.capture(my_stream, format='jpeg')
 
   my_stream.seek(0)
@@ -51,7 +50,7 @@ setInterval(() => {
   actualImageSource = "data:image/png;base64," + data_uri`
 
   python`actualImageSource`.then(x => {
-     console.log(x.substring(0, 80));
+    console.log("post image " + x.length)
     io.emit('image', x);
   });
 
