@@ -51,9 +51,10 @@ setInterval(() => {
   actualImageSource = "data:image/png;base64," + data_uri`
 
   python`actualImageSource`.then(x => {
-     console.log(x.substring(0, 20));
+     console.log(x.substring(0, 80));
+    io.emit('image', x);
   });
-  //io.emit('image', image);
+
 }, 1000);
 
 //python.end();

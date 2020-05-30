@@ -7,7 +7,7 @@
       socket.on('image', (image) => {
         console.log("image");
         const imageElm = document.getElementById('img');
-        image.src = 'data:image/jpeg;base46,' + image;
+        image.src = image;
       });
     </script>
     <meta charset="utf-8">
