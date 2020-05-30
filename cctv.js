@@ -52,4 +52,4 @@ setInterval(() => {
   //io.emit('image', image);
 }, 1000);
 
-python.end();
+//python.end();
