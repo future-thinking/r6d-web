@@ -2,7 +2,9 @@ const pythonBridge = require("python-bridge");
 
 const python = pythonBridge();
 
-const pyCode = "10 + 12";
+const pyCode = 12;
+const aa = 10;
 
+python.ex`exec("a = " + ${aa}`;
 
-python`${pyCode}`.then(x => console.log(x));
+python`a`.then(x => console.log(x));

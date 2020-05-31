@@ -23,6 +23,8 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
   }
 }
