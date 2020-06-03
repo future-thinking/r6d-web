@@ -5,6 +5,8 @@ const socketIo = require("socket.io");
 
 app = express();
 
+const wss = require("express-ws")(app);
+
 const http = require("http")
 server = http.createServer(app);
 io = socketIo(server);
