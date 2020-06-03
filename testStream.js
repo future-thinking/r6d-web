@@ -1,33 +1,29 @@
+process.on('uncaughtException', function(err) {
+    console.log('Caught exception: ' + err);
+    console.log(err.stack);
+});
+
+const express = require('express');
 const raspividStream = require('raspivid-stream');
 
-const express = require("express");
-const socketIo = require("socket.io");
+const app = express();
+const wss = require('express-ws')(app);
 
-app = express();
-
-const wss = require("express-ws")(app);
-
-const http = require("http")
-server = http.createServer(app);
-io = socketIo(server);
-
-app.get('*', function(req, res){
-    res.send("\n" +
-        "<html>\n" +
-        "    <body>\n" +
-        "        <script type=\"text/javascript\" src=\"https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js\"></script>\n" +
-        "        <script>\n" +
-        "            var canvas = document.createElement(\"canvas\");\n" +
-        "            document.body.appendChild(canvas);\n" +
-        "\n" +
-        "            var wsavc = new WSAvcPlayer(canvas, \"webgl\");\n" +
-        "\n" +
-        "            var protocol = window.location.protocol === \"https:\" ? \"wss:\" : \"ws:\"\n" +
-        "            wsavc.connect(protocol + '//' + window.location.host + '/video-stream');\n" +
-        "        </script>\n" +
-        "    </body>\n" +
-        "</html>")
-});
+app.get('/', (req, res) => res.send("" +
+    "<html>\n" +
+    "    <body>\n" +
+    "        <script type=\"text/javascript\" src=\"https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js\"></script>\n" +
+    "        <script>\n" +
+    "            var canvas = document.createElement(\"canvas\");\n" +
+    "            document.body.appendChild(canvas);\n" +
+    "\n" +
+    "            var wsavc = new WSAvcPlayer(canvas, \"webgl\");\n" +
+    "\n" +
+    "            var protocol = window.location.protocol === \"https:\" ? \"wss:\" : \"ws:\"\n" +
+    "            wsavc.connect(protocol + '//' + window.location.host + '/video-stream');\n" +
+    "        </script>\n" +
+    "    </body>\n" +
+    "</html>"));
 
 app.ws('/video-stream', (ws, req) => {
     console.log('Client connected');
@@ -50,10 +46,9 @@ app.ws('/video-stream', (ws, req) => {
     });
 });
 
-io.on('connection', function(socket) {
-    console.log('[+] user');
-});
+app.use(function (err, req, res, next) {
+    console.error(err);
+    next(err);
+})
 
-server.listen(80, function() {
-    console.log('web interface listening on localhost:80');
-});
+app.listen(80, () => console.log('Server started on 80'));
