@@ -23,6 +23,13 @@ server.listen(80, function() {
 
 let stream = raspividStream();
 
+let first = 0;
+
 stream.on('data', (data) => {
-    console.log(data);
+    if (first < 10) {
+      first++;
+      if (first === 10) {
+          console.log(data.toString());
+      }
+    }
 });
