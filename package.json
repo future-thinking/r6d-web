@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "pigpio": "^3.0.0",
     "python-bridge": "^1.1.0",
+    "raspivid-stream": "^0.2.1",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {

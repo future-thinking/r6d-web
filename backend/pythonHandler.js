@@ -21,7 +21,7 @@ class pythonHandler {
         if (!this.started)
             return;
 
-        python.ex`exec(open("python/${file}").read())`
+        this.python.ex`exec(open("python/" + ${file}).read())`
     }
 
     executePython(python) {
