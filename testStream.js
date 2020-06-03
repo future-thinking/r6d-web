@@ -1,14 +1,26 @@
 const raspividStream = require('raspivid-stream');
 
+const express = require("express");
+const socketIo = require("socket.io");
 
-const netHandlder = require("backend/netHandler")();
+app = express();
+server = http.createServer(app);
+io = socketIo(server);
 
-netHandlder.start();
+app.get('*', function(req, res){
+    res.send("hi")
+});
 
+io.on('connection', function(socket) {
+    console.log('[+] user');
+});
 
-var stream = raspividStream();
+http.listen(80, function() {
+    console.log('web interface listening on localhost:80');
+});
 
-// To stream over websockets:
-videoStream.on('data', (data) => {
-    ws.send(data, { binary: true }, (error) => { if (error) console.error(error); });
+let stream = raspividStream();
+
+stream.on('data', (data) => {
+    console.log(data);
 });
