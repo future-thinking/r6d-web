@@ -5,7 +5,7 @@ const socketIo = require("socket.io");
 
 app = express();
 
-const http = require("http").createServer(app);
+const http = require("http")
 server = http.createServer(app);
 io = socketIo(server);
 
@@ -17,7 +17,7 @@ io.on('connection', function(socket) {
     console.log('[+] user');
 });
 
-http.listen(80, function() {
+server.listen(80, function() {
     console.log('web interface listening on localhost:80');
 });
 
