@@ -3,6 +3,8 @@ const raspividStream = require('raspivid-stream');
 const express = require("express");
 const socketIo = require("socket.io");
 
+const http = require("http");
+
 app = express();
 server = http.createServer(app);
 io = socketIo(server);
